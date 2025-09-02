@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TitanTechnologyView.Models.ProjectEmployee>
+
+@{
+    ViewData["Title"] = "Project Employees";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a class="btn btn-primary mb-3" asp-action="AddEdit">+ Add Project Employee</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Project Code</th>
+            <th>Employee ID</th>
+            <th>Employee Type</th>
+            <th>Technology</th>
+            <th>Consultant Rate</th>
+            <th>Customer Rate</th>
+            <th>Timesheet Required</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Inactive</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.Id</td>
+                <td>@emp.ProjectCode</td>
+                <td>@emp.EmployeeId</td>
+                <td>@emp.EmployeeType</td>
+                <td>@emp.Technology</td>
+                <td>
+                    <input type="checkbox" disabled="disabled" @(emp.Inactive == true ? "checked" : "") />
+                </td>
+                <td>@emp.ConsultantRate</td>
+                <td>@emp.CustomerRate</td>
+                <td>@(emp.TimesheetRequired == true ? "Yes" : "No")</td>
+                <td>@emp.EmployeeStartDate?.ToShortDateString()</td>
+                <td>@emp.EmployeeEndDate?.ToShortDateString()</td>
+                <td>
+                    <a asp-action="AddEdit" asp-route-id="@emp.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@emp.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Register / Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>@ViewBag.Title</h2>
+
+        <!-- Registration Form -->
+        <form method="post" action="/Account/Register">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="Username" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="Email" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="Password" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="role">Select Role</label>
+                <select id="role" name="Role" class="form-control" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Vendor">Vendor</option>
+                    <option value="Customer">Customer</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Register</button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <!-- Login Form -->
+        <form method="post" action="/Account/Login">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="Email" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="Password" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="loginRole">Select Role</label>
+                <select id="loginRole" name="Role" class="form-control" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Vendor">Vendor</option>
+                    <option value="Customer">Customer</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Login</button>
+        </form>
+    </div>
+</div>

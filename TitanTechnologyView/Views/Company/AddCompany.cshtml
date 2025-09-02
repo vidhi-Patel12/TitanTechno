@@ -1,0 +1,89 @@
+﻿@model TitanTechnologyView.Models.CompanyMaster
+
+<h2>@(string.IsNullOrEmpty(Model.CompanyCode) ? "Create Company" : "Edit Company")</h2>
+
+<form asp-action="AddCompany" method="post">
+    <div class="form-group">
+        <label asp-for="CompanyCode"></label>
+
+        @if (string.IsNullOrEmpty(Model.CompanyCode))
+
+        {
+            <!-- Editable for Add -->
+            <input asp-for="CompanyCode" class="form-control" />
+
+        }
+
+        else
+
+        {
+            <!-- Readonly for Edit -->
+            <input type="text" value="@Model.CompanyCode" class="form-control" readonly />
+            <input type="hidden" asp-for="CompanyCode" />
+
+        }
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CompanyAddress"></label>
+        <input asp-for="CompanyAddress" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gstn"></label>
+        <input asp-for="Gstn" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PanNumber"></label>
+        <input asp-for="PanNumber" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ContactPersonName"></label>
+        <input asp-for="ContactPersonName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ContactPersonNumber"></label>
+        <input asp-for="ContactPersonNumber" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaymentTerms"></label>
+        <input asp-for="PaymentTerms" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BankName"></label>
+        <input asp-for="BankName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AccountName"></label>
+        <input asp-for="AccountName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BankAccountNumber"></label>
+        <input asp-for="BankAccountNumber" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IfscCode"></label>
+        <input asp-for="IfscCode" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Micr"></label>
+        <input asp-for="Micr" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

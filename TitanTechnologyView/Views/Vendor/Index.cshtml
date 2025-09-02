@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TitanTechnologyView.Models.VendorMaster>
+
+@{
+    ViewData["Title"] = "Vendors";
+}
+
+<h2>Vendor List</h2>
+
+<p>
+    <a asp-action="VendorForm" class="btn btn-primary">Add New Vendor</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Vendor ID</th>
+            <th>Company Code</th>
+            <th>Vendor Name</th>
+            <th>GSTN</th>
+            <th>PAN</th>
+            <th>Contact Person</th>
+            <th>Contact Number</th>
+            <th>Payment Terms</th>
+            <th>Bank Name</th>
+            <th>Account Number</th>
+            <th>IFSC Code</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var vendor in Model)
+            {
+                <tr>
+                    <td>@vendor.VendorId</td>
+                    <td>@vendor.CompanyCode</td>
+                    <td>@vendor.VendorName</td>
+                    <td>@vendor.Gstn</td>
+                    <td>@vendor.PanNumber</td>
+                    <td>@vendor.ContactPersonName</td>
+                    <td>@vendor.ContactPersonNumber</td>
+                    <td>@vendor.PaymentTerms</td>
+                    <td>@vendor.BankAccountName</td>
+                    <td>@vendor.AccountNumber1</td>
+                    <td>@vendor.IfscCode</td>
+                    <td>
+                        <a asp-action="VendorForm" asp-route-id="@vendor.VendorId" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@vendor.VendorId"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this vendor?');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="12" class="text-center text-muted">No vendors found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

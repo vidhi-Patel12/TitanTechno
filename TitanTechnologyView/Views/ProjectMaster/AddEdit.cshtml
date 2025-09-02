@@ -1,0 +1,69 @@
+﻿@model TitanTechnologyView.Models.ProjectMaster
+@{
+    var isEdit = !string.IsNullOrWhiteSpace(Model?.ProjectCode);
+    ViewData["Title"] = isEdit ? "Edit Project" : "Add Project";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Save" method="post">
+    <div class="form-group">
+        <label asp-for="ProjectCode"></label>
+        <input asp-for="ProjectCode" class="form-control"
+               readonly="@(Model.ProjectCode != null)" />
+        <span asp-validation-for="ProjectCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate"></label>
+        <input asp-for="EndDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CustomerId"></label>
+        <input asp-for="CustomerId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CustomerRate"></label>
+        <input asp-for="CustomerRate" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RateUnit"></label>
+        <input asp-for="RateUnit" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HsCode"></label>
+        <input asp-for="HsCode" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ApprovalLevel"></label>
+        <input asp-for="ApprovalLevel" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">@(isEdit ? "Update Project" : "Add Project")</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>

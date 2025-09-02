@@ -1,0 +1,73 @@
+﻿<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <!-- Logo + Brand -->
+            <a class="navbar-brand d-flex align-items-center fw-bold text-dark" href="@Url.Action("Index", "Home")">
+                <img src="~/logoImages/Titan.png" alt="Titan Technology" height="70" class="me-2" />
+               
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Nav Links -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                           href="@Url.Action("Index", "Home")">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "About" ? "active" : "")"
+                           href="@Url.Action("About", "Home")">
+                            <i class="fas fa-info-circle me-1"></i> About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Services" ? "active" : "")"
+                           href="@Url.Action("Services", "Home")">
+                            <i class="fas fa-cogs me-1"></i> Services
+                        </a>
+                    </li>
+                    @* <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cogs me-1"></i> Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="#">SAP Implementation</a></li>
+                            <li><a class="dropdown-item" href="#">SAP Rollout</a></li>
+                            <li><a class="dropdown-item" href="#">SAP Migration</a></li>
+                            <li><a class="dropdown-item" href="#">SAP Staffing</a></li>
+                            <li><a class="dropdown-item" href="#">SAP AMS</a></li>
+                        </ul>
+                    </li> *@
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Solutions" ? "active" : "")"
+                           href="@Url.Action("Solutions", "Home")">
+                            <i class="fas fa-lightbulb me-1"></i> Solutions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Careers" ? "active" : "")"
+                           href="@Url.Action("Careers", "Home")">
+                            <i class="fas fa-briefcase me-1"></i> Careers
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn contact-btn rounded-pill px-4 @(ViewContext.RouteData.Values["action"].ToString() == "Contact" ? "active" : "")"
+                           href="@Url.Action("Contact", "Home")">
+                            <i class="fas fa-phone-alt me-2"></i> Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+ 
+</header>

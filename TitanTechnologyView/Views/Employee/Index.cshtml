@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TitanTechnologyView.Models.EmployeeFormDto>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h2>Employee List</h2>
+
+<a class="btn btn-primary mb-3" asp-controller="Employee" asp-action="AddEmployee">+ Add Employee</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Company</th>
+            <th>Vendor</th>
+            <th>Contact</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.EmployeeId</td>
+                <td>@emp.Name</td>
+                <td>@emp.EmployeeType</td>
+                <td>@emp.CompanyCode</td>
+                <td>@emp.VendorId</td>
+                <td>@emp.ContactNumber1</td>
+                <td>
+                    <a asp-action="AddEmployee" asp-route-id="@emp.EmployeeId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteEmployee" asp-route-id="@emp.EmployeeId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
