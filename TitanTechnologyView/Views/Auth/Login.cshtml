@@ -1,0 +1,312 @@
+﻿@model TitanTechnologyView.Models.Register
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="hero-area-form style-one d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcumb-content">
+                    <h4>Login</h4>
+                    <ul>
+                        <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                        <li>></li>
+                        <li>Login</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- login -->
+<div class="contact-area style-three inner">
+    <div class="container">
+        <div class="row add-white-bg align-items-center">
+            <!-- Left Side (Login Form) -->
+            <div class="col-lg-8 col-md-12">
+                <div class="single-contact-box">
+                    <div class="contact-contetn">
+                        <h4>Login</h4>
+                    </div>
+
+                    <!-- Login with Password -->
+                    <form asp-controller="Auth" asp-action="LoginWithPassword" method="post" id="passwordLoginForm" novalidate>
+                        <div class="row">
+                            <div class="col-lg-12 d-flex justify-content-center mb-3">
+                                <button type="button" id="passwordBtn" class="btn btn-dark me-2" onclick="showLoginWithPassword()">Login with Password</button>
+                                <button type="button" id="otpBtn" class="btn btn-outline-dark" onclick="showLoginWithOTP()">Login with OTP</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="single-input-box">
+                                    <input type="tel" id="loginMobile" name="contact_number" placeholder="Mobile Number" required>
+                                    <span id="loginMobileError" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="single-input-box position-relative">
+                                    <input type="password" id="loginPassword" name="Password" placeholder="Password" required>
+                                    <span id="loginPasswordError" class="text-danger"></span>
+                                    <span class="toggle-password unshow">
+                                        <i class="icon-eye-hide-line"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                           
+
+                            <div class="col-lg-12">
+                                <div class="massage-sent-button">
+                                    <button type="submit">Login</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Login with OTP -->
+                    <form asp-controller="Auth" asp-action="LoginWithOTP" method="post" id="otpLoginForm" style="display:none;" novalidate>
+                        <div class="row">
+                            <div class="col-lg-12 d-flex justify-content-center mb-3">
+                                <button type="button" id="passwordBtn2" class="btn btn-outline-dark me-2" onclick="showLoginWithPassword()">Login with Password</button>
+                                <button type="button" id="otpBtn2" class="btn btn-dark" onclick="showLoginWithOTP()">Login with OTP</button>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="single-input-box">
+                                    <input type="tel" id="otpMobile" name="Mobile" placeholder="Mobile Number" required>
+                                    <span id="otpMobileError" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                          
+
+                            <div class="col-lg-12">
+                                <div class="massage-sent-button">
+                                    <button type="submit">Send OTP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Right Side (Info Box) -->
+            <div class="col-lg-4 col-md-12">
+                <div class="single-contact-info-box">
+                    <div class="info-content">
+                        <h4>New Customer?</h4>
+                        <p class="text-white">Be part of our growing family! Create your account today and enjoy exclusive benefits.</p>
+                        <a href="@Url.Action("Register", "Auth")" class="btn btn-fill btn-dark">
+                            <span class="text text-button">Register</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap Modal for OTP Verification -->
+<div class="modal fade" id="otpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="otpModalLabel">Verify OTP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--  OTP form will be loaded here via AJAX -->
+                <div id="otpFormContainer">
+                    <form asp-action="VerifyOTP" method="post">
+                        <input type="hidden" name="Mobile" value="@ViewBag.Mobile" />
+
+                        <div class="form-group">
+                            <label>OTP</label>
+                            <input type="number" class="form-control" name="OTP" required />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-3">Verify OTP</button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p>Didn't receive OTP? <a href="#" onclick="resendOTP('@ViewBag.Mobile')">Resend</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /login -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+     $(document).ready(function () {
+        var mobile = '@(ViewBag.Mobile ?? "")'; //  Read Mobile from ViewBag
+
+        console.log("Mobile from ViewBag:", mobile); //  Debugging
+
+        if (mobile.trim() !== "") {
+            $("#otpModal").modal("show"); //  Open modal when the page loads
+        }
+    });
+
+    function openOtpModal(mobile) {
+        console.log("Opening OTP modal for:", mobile); //  Debugging
+
+        $.ajax({
+            url: "/Account/VerifyOTP?Mobile=" + encodeURIComponent(mobile),
+            type: "GET",
+            success: function (data) {
+                $("#otpFormContainer").html(data);
+                $("#otpModal").modal("show"); //  Open modal after AJAX loads form
+            },
+            error: function () {
+                console.error("Failed to load OTP form"); //  Debugging
+                $("#otpFormContainer").html("<p class='text-danger'>Failed to load OTP form.</p>");
+            }
+        });
+    }
+
+    function resendOTP(mobile) {
+        console.log("Resending OTP for:", mobile); //  Debugging
+
+        $.ajax({
+            url: "/Account/LoginWithOTP",
+            type: "POST",
+            data: { Mobile: mobile }, //  Send Mobile number
+            success: function (response) {
+                // alert("A new OTP has been sent!"); //  Notify user
+                showMessageModal("success", "A new OTP has been sent!")
+            },
+            error: function () {
+                showMessageModal("error","Failed to resend OTP. Please try again.")
+            }
+        });
+    }
+
+    function togglePassword() {
+        var passwordInput = document.getElementById("password");
+        passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+    }
+
+    function showLoginWithPassword() {
+        document.getElementById("passwordLoginForm").style.display = "block";
+        document.getElementById("otpLoginForm").style.display = "none";
+    }
+
+    function showLoginWithOTP() {
+        document.getElementById("passwordLoginForm").style.display = "none";
+        document.getElementById("otpLoginForm").style.display = "block";
+    }
+
+    function showErrorMessage(input, message) {
+        let errorSpan = input.parentNode.querySelector(".error-message");
+
+        // If error span does not exist, create one
+        if (!errorSpan) {
+            errorSpan = document.createElement("span");
+            errorSpan.classList.add("error-message");
+            errorSpan.style.color = "red";
+            errorSpan.style.fontSize = "12px";
+            input.parentNode.appendChild(errorSpan);
+        }
+
+        // Set or clear error message
+        if (message) {
+            errorSpan.innerText = message;
+        } else {
+            errorSpan.innerText = ""; // Remove message when input is valid
+        }
+    }
+
+    function validateMobile(input) {
+        // Limit to 10 digits only
+        input.value = input.value.replace(/\D/g, '').slice(0, 10);
+
+        let mobileRegex = /^\d{10}$/;
+
+        if (input.value.trim() === "") {
+            showErrorMessage(input, "Mobile number is required");
+        } else if (!mobileRegex.test(input.value)) {
+            showErrorMessage(input, "Enter a valid 10-digit mobile number.");
+        } else {
+            showErrorMessage(input, ""); // Clear error if valid
+        }
+    }
+
+    function validatePassword(input) {
+        let strongPasswordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+        if (input.value.trim() === "") {
+            showErrorMessage(input, "Password is required");
+        } else if (!strongPasswordRegex.test(input.value)) {
+            showErrorMessage(input, "Password must be 8-12 characters, include one uppercase letter, one number, and one special character.");
+        } else {
+            showErrorMessage(input, ""); // Clear error if valid
+        }
+    }
+
+    // Select inputs
+    const mobileInput = document.querySelector("#passwordLoginForm input[name='Mobile']");
+    const passwordInput = document.querySelector("#passwordLoginForm input[name='password']");
+    const otpMobileInput = document.querySelector("#otpLoginForm input[name='Mobile']");
+
+    // Attach blur event listeners
+        if (mobileInput) {
+        mobileInput.addEventListener("blur", function () {
+            validateMobile(mobileInput);
+        });
+
+        mobileInput.addEventListener("input", function () {
+            validateMobile(mobileInput);
+        });
+    }
+
+    if (passwordInput) {
+        passwordInput.addEventListener("blur", function () {
+            validatePassword(passwordInput);
+        });
+
+        passwordInput.addEventListener("input", function () {
+            validatePassword(passwordInput);
+        });
+    }
+
+    if (otpMobileInput) {
+        otpMobileInput.addEventListener("blur", function () {
+            validateMobile(otpMobileInput);
+        });
+
+        otpMobileInput.addEventListener("input", function () {
+            validateMobile(otpMobileInput);
+        });
+    }
+
+    function showMessageModal(type, message) {
+         let modalTitle = document.getElementById("messageModalLabel");
+         let modalBody = document.getElementById("messageText");
+         let modalHeader = document.querySelector("#messageModal .modal-header");
+
+         // Update the modal based on type (success or error)
+         if (type === "success") {
+             modalTitle.innerText = "Success";
+             modalBody.innerHTML = ` ${message}`;
+             modalHeader.classList.add("bg-success", "text-white");
+             modalHeader.classList.remove("bg-danger");
+         } else if (type === "error") {
+             modalTitle.innerText = "Error";
+             modalBody.innerHTML = ` ${message}`;
+             modalHeader.classList.add("bg-danger", "text-white");
+             modalHeader.classList.remove("bg-success");
+         }
+
+         // Show the modal
+         let messageModal = new bootstrap.Modal(document.getElementById("messageModal"));
+         messageModal.show();
+     }
+
+</script>

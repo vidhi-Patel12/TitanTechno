@@ -1,4 +1,25 @@
 ﻿@model IEnumerable<TitanTechnologyView.Models.CompanyMaster>
+@* @{
+    ViewBag.Title = "Company";
+} *@
+
+<div class="hero-area-form style-one d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcumb-content">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                        <li>></li>
+                        <li>Company</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <h2>Company List</h2>
 <a class="btn btn-primary" asp-action="AddCompany">Add Company</a>

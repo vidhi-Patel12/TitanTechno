@@ -217,6 +217,14 @@ Tags: consulting, finance, corporate, business, consultant, multipurpose, techno
     height: 945px;
 }
 
+.style-one.hero-area-form {
+    background: url(../images/home-1/breadcumb-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 500px;
+}
+
 .style-one .hero-content h4 {
     font-size: 25px;
     font-weight: 600;
@@ -798,7 +806,7 @@ Tags: consulting, finance, corporate, business, consultant, multipurpose, techno
     border: transparent;
     outline: 0;
     width: 100%;
-    height: 50px;
+    height: 30px;
     color: #fff;
     margin-bottom: 16px;
     padding: 0 19px;
@@ -3867,7 +3875,7 @@ Tags: consulting, finance, corporate, business, consultant, multipurpose, techno
 .style-three .single-input-box input {
     border: 2px solid rgba(4,20,36,0.1);
     width: 100%;
-    height: 60px;
+    height: 45px;
     padding: 0 20px;
     border-radius: 3px;
     outline: 0;
@@ -3883,7 +3891,7 @@ Tags: consulting, finance, corporate, business, consultant, multipurpose, techno
 .style-three .single-input-box select {
     border: 2px solid rgba(4,20,36,0.1);
     width: 100%;
-    height: 60px;
+    height: 45px;
     padding: 0 20px;
     border-radius: 3px;
     outline: 0;
@@ -3910,7 +3918,7 @@ Tags: consulting, finance, corporate, business, consultant, multipurpose, techno
     background-color: #0c5adb;
     border: 2px solid #0c5adb;
     color: #fff;
-    padding: 15px 38px;
+    padding: 5px 38px;
     transition: 0.5s;
 }
 
